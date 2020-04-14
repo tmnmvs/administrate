@@ -76,7 +76,7 @@ describe Administrate::Order do
 
         expect(relation).to have_received(:left_joins).with(:name)
         expect(relation).to have_received(:group).with(:id)
-        expect(relation).to have_received(:reorder).with("COUNT(name.id) asc")
+        expect(relation).to have_received(:reorder).with("COUNT(table_name.id) asc")
         expect(ordered).to eq(relation)
       end
     end
@@ -197,6 +197,7 @@ describe Administrate::Order do
           "#{association}_reflection",
           macro: association,
           foreign_key: foreign_key,
+          table_name: 'table_name'
         ),
       ),
     )

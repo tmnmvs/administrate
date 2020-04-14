@@ -62,7 +62,7 @@ module Administrate
       relation.
         left_joins(attribute.to_sym).
         group(:id).
-        reorder("COUNT(#{attribute}.id) #{direction}")
+        reorder("COUNT(#{reflection_table_name(relation)}.id) #{direction}")
     end
 
     def order_by_id(relation)
@@ -83,6 +83,10 @@ module Administrate
 
     def foreign_key(relation)
       reflect_association(relation).foreign_key
+    end
+
+    def reflection_table_name(relation)
+      reflect_association(relation).table_name
     end
   end
 end
